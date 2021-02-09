@@ -113,13 +113,13 @@ if __name__ == '__main__':
                 "access token from the app console on the web."
             )
         path = arguments['--path']
+        output = arguments['--output']
         result = dbx.files_list_folder(path)
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            for entry in result.entries:
-                local_path = os.path.join(tmpdirname, entry.name)
-                dbx.files_download_to_file(local_path, entry.path_lower, entry.rev)
-                pprint(entry)
-                print(f"Saved {entry.name} to {local_path}")
-                wait = input("Press Enter to continue.")
+        # maybe temp dir per file and extract highlight in the same dir?
+        for entry in result.entries:
+            local_path = os.path.join(output, entry.name)
+            dbx.files_download_to_file(local_path, entry.path_lower, entry.rev)
+            pprint(entry)
+            print(f"Saved {entry.name} to {local_path}")
 
         print("Done!")

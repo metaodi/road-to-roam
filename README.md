@@ -20,8 +20,9 @@ This is where these scripts here come into play: I run the script here on a regu
 # Installation
 
 1. Clone this repository `git clone https://github.com/metaodi/road-to-roam.git`
+1. Install https://github.com/benlongo/remarkable-highlights on your machine and define the path to your clone in your `.env`
 1. If you want to fetch files from Dropbox, [create a new Dropbox app and generate an access token].
-1. Copy the `.env.dist` file to `.env` and edit the values (save the Dropbox access token there)
+1. Copy the `.env.dist` file to `.env` and edit the values
 1. Run `setup.sh` to create a new virtualenv and install all python dependencies (or simply run `pip install -r requirements.txt` if you don't want a new virtualenv)
 
 # Usage
