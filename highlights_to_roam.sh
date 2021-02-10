@@ -8,8 +8,8 @@ function cleanup {
 trap "cleanup" EXIT
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-source $DIR/env/bin/activate
-source $DIR/.env
+[ -d $DIR/env ] && source $DIR/env/bin/activate
+[ -f $DIR/.env ] source $DIR/.env
 
 # create a new temp directory
 tmp_dir=$(mktemp -d -t road-to-roam-XXXXXXXXXX)
