@@ -38,5 +38,10 @@ jobs:
     
     # run the scripts
     - name: Sync highlights
+      env:
+        REMARKABLE_HIGHLIGHTS_PATH: remarkable-highlights
+        ROAM_API_GRAPH: ${{ secrets.ROAM_API_GRAPH }}
+        ROAM_API_EMAIL: ${{ secrets.ROAM_API_EMAIL }}
+        ROAM_API_PASSWORD: ${{ secrets.ROAM_API_PASSWORD }}
       run: |
         echo "run the scripts here"
