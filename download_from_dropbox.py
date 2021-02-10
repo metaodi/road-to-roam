@@ -117,9 +117,12 @@ if __name__ == '__main__':
         result = dbx.files_list_folder(path)
         # maybe temp dir per file and extract highlight in the same dir?
         for entry in result.entries:
-            local_path = os.path.join(output, entry.name)
-            dbx.files_download_to_file(local_path, entry.path_lower, entry.rev)
-            pprint(entry)
-            print(f"Saved {entry.name} to {local_path}")
+            try:
+                local_path = os.path.join(output, entry.name)
+                dbx.files_download_to_file(local_path, entry.path_lower, entry.rev)
+                pprint(entry)
+                print(f"Saved {entry.name} to {local_path}")
+            except AttributeError:
+                continue
 
         print("Done!")
