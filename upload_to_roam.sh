@@ -9,7 +9,7 @@ trap "cleanup" EXIT
 
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-source $DIR/.env
+[ -f $DIR/.env ] && source $DIR/.env
 
 #$DIR/node_modules/.bin/roam-api -g $ROAM_API_GRAPH -e $ROAM_API_EMAIL -p $ROAM_API_PASSWORD search "pk19"
 #node ./node_modules/roam-research-private-api/examples/quick_capture.js -g $ROAM_API_GRAPH -e $ROAM_API_EMAIL -p $ROAM_API_PASSWORD "test 123"
