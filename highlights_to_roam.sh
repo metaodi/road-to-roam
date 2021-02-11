@@ -23,7 +23,7 @@ do
     hl_dir=$(mktemp -d -t road-to-roam-hl-XXXXXXXXXX)
     (
     cd $REMARKABLE_HIGHLIGHTS_PATH
-    poetry run remarkable-highlights --out $hl_dir "${pdf_file}"
+    poetry run remarkable-highlights --yes --out $hl_dir "${pdf_file}"
     $DIR/upload_to_roam.sh
     )
 done
