@@ -29,8 +29,15 @@ do
     cd $REMARKABLE_HIGHLIGHTS_PATH
     [ -d $REMARKABLE_HIGHLIGHTS_PATH/env ] && source $REMARKABLE_HIGHLIGHTS_PATH/env/bin/activate
     poetry run remarkable-highlights --out $hl_dir "${pdf_file}"
-    $DIR/upload_to_roam.sh
     )
+    # create dropbox link
+    dropbox_link=$($DIR/create_dropbox_link.py --path "/${filename}")
+
+    # upload highlights to roam
+    python $DIR/highlights_to_json.py --path $hl_dir --title "${filename}" --url "${dropbox_link}" | node $DIR/import_data_to_roam.js
+
+    # move file to subdir
+    $DIR/move_in_dropbox.py -s "/${filename}" -t "/synced-to-roam/${filename}"
 done
 
 

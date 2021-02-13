@@ -1,0 +1,33 @@
+[
+    {
+        "title":"🟦  ",
+        "children":[
+            {
+                "string":"Type:: #[[🟦 Referenznotiz]] #[[🟩 Zettelkasten]] #[[📥 Inbox]]"
+            },
+            {
+                "string":"Tags:: "
+            },
+            {
+                "string":"Source:: "
+            },
+            {
+                "string":"Medium:: "
+            },
+            {
+                "string":"Autor:: "
+            },
+            {
+                "string":"Summary::",
+                "children":[]
+            },
+            {
+                "string":"Highlights::",
+                "children":[]
+            },
+            {
+                "string":"PDF: <url>"
+            }
+        ]
+    }
+]

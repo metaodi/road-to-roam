@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Download files from dropbox directory
+"""Create link for file in dropbox
 
 Usage:
-  download_from_dropbox.py --path <path-to-dropbox-directory> --output <path-to-local-directory>
-  download_from_dropbox.py (-h | --help)
-  download_from_dropbox.py --version
+  create_dropbox_link.py --path <path-to-dropbox-file> 
+  create_dropbox_link.py (-h | --help)
+  create_dropbox_link.py --version
 
 Options:
   -h, --help                             Show this screen.
   --version                              Show version.
-  -p, --path <path-to-dropbox-directory> Path to Dropbox directory.
-  -o, --output <path-to-local-directory> Path to local directory to save the downloaded files.
+  -p, --path <path-to-dropbox-directory> Path to Dropbox file.
 
 """
 
 import sys
 import os
 import tempfile
+import traceback
 import dropbox
 from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
@@ -27,10 +27,9 @@ from dotenv import load_dotenv, find_dotenv
 arguments = docopt(__doc__, version='Download files from Dropbox 1.0')
 load_dotenv(find_dotenv())
 
+TOKEN = os.getenv('DROPBOX_TOKEN', '')
 
 from pprint import pprint
-
-TOKEN = os.getenv('DROPBOX_TOKEN', '')
 
 if __name__ == '__main__':
     try:
@@ -51,16 +50,15 @@ if __name__ == '__main__':
                     "access token from the app console on the web."
                 )
             path = arguments['--path']
-            output = arguments['--output']
-            result = dbx.files_list_folder(path)
-            for entry in result.entries:
-                try:
-                    local_path = os.path.join(output, entry.name)
-                    dbx.files_download_to_file(local_path, entry.path_lower, entry.rev)
-                    print(f"Saved {entry.name} to {local_path}")
-                except AttributeError:
-                    continue
-            print("Done!")
+            try:
+                shared_link_metadata = dbx.sharing_create_shared_link_with_settings(path)
+                print(shared_link_metadata.url)
+            except ApiError as err:
+                if err.error.is_shared_link_already_exists():
+                    shared_links = dbx.sharing_list_shared_links(path) 
+                    print(shared_links.links[0].url)
+                else:
+                    raise
     except Exception as e:
         print("Error: %s" % e, file=sys.stderr)
         print(traceback.format_exc(), file=sys.stderr)
