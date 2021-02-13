@@ -17,6 +17,7 @@ echo "Creating temp dir ${tmp_dir}"
 
 
 $DIR/download_from_dropbox.py --path "" --output $tmp_dir
+shopt -s nullglob
 for pdf_file in $tmp_dir/*.pdf
 do
     filename=`basename "${pdf_file}"`
