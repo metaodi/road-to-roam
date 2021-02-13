@@ -1,6 +1,8 @@
 name: Sync highlights to Roam
 
 on:
+  schedule:
+    - cron:  '45 5 * * *' # run on 5:45 UTC
   workflow_dispatch:
 
 jobs:
