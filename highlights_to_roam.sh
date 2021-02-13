@@ -42,4 +42,4 @@ do
 done
 
 
-# rm -rf $tmp_dir
+rm -rf $tmp_dir
