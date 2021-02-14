@@ -2,7 +2,7 @@
   "name": "road-to-roam",
   "version": "0.0.1",
   "description": "Helper to transfer content to Roam Research",
-  "main": "index.js",
+  "main": "sync_to_roam.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
