@@ -35,7 +35,8 @@ do
     dropbox_link=$($DIR/create_dropbox_link.py --path "/${filename}")
 
     # upload highlights to roam
-    python $DIR/highlights_to_json.py --path $hl_dir --title "${filename}" --url "${dropbox_link}" > $tmp_dir/hl.json
+    title=$(echo $filename | sed 's/\([A-Z]\)/ \1/g' | sed 's/[^ ]\+/\L\u&/g' | sed 's/\.pdf$//g' | xargs)
+    python $DIR/highlights_to_json.py --path $hl_dir --title "${title}" --url "${dropbox_link}" > $tmp_dir/hl.json
     jq -r '.[0].title' $tmp_dir/hl.json | $DIR/add_to_roam_daily_notes.sh
     cat $tmp_dir/hl.json | node $DIR/import_data_to_roam.js
 
