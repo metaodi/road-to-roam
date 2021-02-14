@@ -47,4 +47,4 @@ jobs:
         ROAM_API_EMAIL: ${{ secrets.ROAM_API_EMAIL }}
         ROAM_API_PASSWORD: ${{ secrets.ROAM_API_PASSWORD }}
       run: |
-        ./highlights_to_roam.sh
+        ./sync_to_roam.sh
