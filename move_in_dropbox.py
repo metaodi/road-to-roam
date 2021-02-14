@@ -54,7 +54,7 @@ if __name__ == '__main__':
             source = arguments['--source']
             target = arguments['--target']
             result = dbx.files_move_v2(source, target)
-            print(result.metadata)
+            #print(result.metadata)
             print(f"Moved file from {source} to {target}.")
     except Exception as e:
         print("Error: %s" % e, file=sys.stderr)
