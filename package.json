@@ -4,7 +4,8 @@
   "description": "Helper to transfer content to Roam Research",
   "main": "sync_to_roam.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "patch-package"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "roam-research-private-api": "^0.9.3"
+  },
+  "devDependencies": {
+    "patch-package": "^6.4.7"
   }
 }
