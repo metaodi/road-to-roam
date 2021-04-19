@@ -18,11 +18,13 @@ import sys
 import os
 import tempfile
 import traceback
+import urllib.parse
 import dropbox
 from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 from docopt import docopt
 from dotenv import load_dotenv, find_dotenv
+
 
 arguments = docopt(__doc__, version='Download files from Dropbox 1.0')
 load_dotenv(find_dotenv())
@@ -50,15 +52,22 @@ if __name__ == '__main__':
                     "access token from the app console on the web."
                 )
             path = arguments['--path']
+            url = ''
             try:
                 shared_link_metadata = dbx.sharing_create_shared_link_with_settings(path)
-                print(shared_link_metadata.url)
+                url = shared_link_metadata.url
             except ApiError as err:
                 if err.error.is_shared_link_already_exists():
                     shared_links = dbx.sharing_list_shared_links(path) 
-                    print(shared_links.links[0].url)
+                    url = shared_links.links[0].url
                 else:
                     raise
+            # generate raw=1 link (to prevent rending of Dropbox preview page)
+            params = {'raw':'1'}
+            url_parts = list(urllib.parse.urlparse(url))
+            # replace previous query string
+            url_parts[4] = urllib.parse.urlencode(params) 
+            print(urllib.parse.urlunparse(url_parts))
     except Exception as e:
         print("Error: %s" % e, file=sys.stderr)
         print(traceback.format_exc(), file=sys.stderr)
