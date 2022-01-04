@@ -27,5 +27,5 @@ This is where these scripts here come into play: I run the script here on a regu
 
 # Usage
 
-
+The script is run by GitHub Actions on a schedule.
 
