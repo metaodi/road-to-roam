@@ -31,11 +31,13 @@ jobs:
       
     - name: Install dependencies
       env:
-        PUPPETEER_PRODUCT: firefox
+        PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+        PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
       run: |
+        sudo apt-get update
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        sudo apt-get install jq
+        sudo apt-get install -y jq google-chrome-stable --no-install-recommends
         npm ci
         cd remarkable-highlights
         poetry install
@@ -48,5 +50,7 @@ jobs:
         ROAM_API_GRAPH: ${{ secrets.ROAM_API_GRAPH }}
         ROAM_API_EMAIL: ${{ secrets.ROAM_API_EMAIL }}
         ROAM_API_PASSWORD: ${{ secrets.ROAM_API_PASSWORD }}
+        PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+        PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
       run: |
         ./sync_to_roam.sh
