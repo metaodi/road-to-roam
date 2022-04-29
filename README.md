@@ -4,13 +4,13 @@ road-to-roam
 This repository is a collection of scripts with the goal to get highlights (and later maybe other annotations as well) from PDFs to Roam Research.
 In my workflow, I use my [remarkable 2 tablet](https://remarkable.com/) to highlight PDFs and I want to make sure, these highlights are saved to my [Roam Research](https://roamresearch.com) database.
 
-There are many project to access the files on the remarkable cloud (e.g. remapy or rmapi) and there are several projects to extract highlights from the remarkable-annotated PDFs (e.g. remarkable-highlights, remarks and biff).
+There are many projects to access the files on the remarkable cloud (e.g. remapy or rmapi) and there are several projects to extract highlights from the remarkable-annotated PDFs (e.g. remarkable-highlights, remarks and biff).
 For my purposes I use remarkable-highlights since the output is a simple text file and PNG images.
 Your needs might be different.
 
 My workflow is currently like this:
 
-- Load a PDF on my remarkable (either my using the app or using website-to-remarkable to get automatically the top posts from HackerNews and other websites)
+- Load a PDF on my remarkable (either by using the app or using website-to-remarkable to get automatically the top posts from HackerNews and other websites)
 - Highlight these PDFs
 - Export the PDFs using the remarkable app's share functionality
 - Upload the PDFs to dropbox
